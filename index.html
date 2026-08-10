@@ -1,0 +1,844 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Otto Fly — Family run aerial work, South Africa</title>
+<meta name="description" content="Otto Fly is a family-run drone operation. Crop spraying and seeding, alien vegetation eradication, land surveying, geomapping, turbine inspection and dam waterproofing across South Africa.">
+<link rel="canonical" href="https://ottofly.co.za/">
+<meta name="theme-color" content="#050B12">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Otto Fly">
+<meta property="og:title" content="Otto Fly — Family run aerial work">
+<meta property="og:description" content="Crop spraying and seeding, alien vegetation eradication, surveying, geomapping, turbine inspection and dam waterproofing. Across South Africa.">
+<meta property="og:url" content="https://ottofly.co.za/">
+<meta property="og:image" content="https://ottofly.co.za/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --night:#050B12;--deep:#0A1622;--deeper:#07101A;--blue:#17304A;
+  --amber:#F0A93B;--amber-soft:rgba(240,169,59,.35);--bone:#EDE9E1;
+  --dim:rgba(237,233,225,.5);--dimmer:rgba(237,233,225,.22);--hair:rgba(237,233,225,.12);
+  --disp:"Outfit","Helvetica Neue",Arial,sans-serif;
+  --mono:"Space Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--night);color:var(--bone);font-family:var(--disp);font-weight:300;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+svg{display:block}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:1px solid var(--amber);outline-offset:4px}
+.mono{font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,60px)}
+h2{margin:0;font-weight:200;letter-spacing:.01em;line-height:1.06}
+h2 em{font-style:normal;color:var(--amber)}
+
+/* ---------- bar ---------- */
+.bar{position:absolute;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;gap:22px;
+  padding:24px clamp(20px,5vw,60px)}
+.bar.solid{position:relative;border-bottom:1px solid var(--hair)}
+.lock{display:flex;align-items:center;gap:12px;margin-right:auto}
+.lock svg{width:36px;height:36px;flex:0 0 36px}
+.lock .name{font-size:.9rem;font-weight:400;letter-spacing:.32em}
+.lock .name i{font-style:normal;color:var(--amber)}
+.bar nav{display:flex;gap:26px}
+.bar nav a{color:var(--dim);transition:color .2s}
+.bar nav a:hover{color:var(--bone)}
+.bar nav a[aria-current]{color:var(--bone);box-shadow:inset 0 -1px 0 var(--amber)}
+@media(max-width:760px){.bar nav{gap:16px}.bar .tel{display:none}}
+
+/* ---------- routes ---------- */
+.route{display:none}
+.route.on{display:block}
+
+/* ---------- hero ---------- */
+.hero{position:relative;height:100svh;min-height:640px;overflow:hidden}
+.sky{position:absolute;inset:0;width:100%;height:100%}
+.decal{position:absolute;z-index:3;color:var(--amber);pointer-events:none}
+.decal.right{right:-6%;bottom:-14%;width:min(46vw,520px);opacity:.17}
+.decal.left{left:-7%;bottom:-9%;width:min(30vw,320px);opacity:.11;transform:scaleX(-1) rotate(6deg)}
+.horizon{position:absolute;left:0;right:0;top:64%;height:1px;z-index:5;
+  background:linear-gradient(90deg,transparent,var(--dimmer) 8%,var(--bone) 50%,var(--dimmer) 92%,transparent)}
+.ticks{position:absolute;left:0;right:0;top:64%;height:26px;z-index:5;
+  background-image:linear-gradient(90deg,var(--dimmer) 1px,transparent 1px);
+  background-size:64px 7px;background-repeat:repeat-x;opacity:.55}
+.link{position:absolute;inset:0;width:100%;height:100%;z-index:6;pointer-events:none;overflow:visible}
+#ray{stroke:var(--amber);stroke-width:1;stroke-dasharray:2 5;opacity:.7;transition:opacity .5s ease}
+#markG{transition:opacity .9s ease}
+#solid{fill:none;stroke:var(--amber);stroke-linecap:round;stroke-linejoin:round;opacity:0;
+  transition:opacity .8s ease;filter:drop-shadow(0 0 12px rgba(240,169,59,.6))}
+#dots{transition:opacity .8s ease}
+#dots circle{fill:var(--amber);opacity:0;transition:opacity .3s ease}
+.station{position:absolute;top:64%;z-index:6;transform:translate(-50%,-100%)}
+.station svg{width:26px;height:22px}
+.craft{position:absolute;top:0;left:0;z-index:7;transform:translate(-50%,-50%);transition:opacity .8s ease}
+.craft .halo{position:absolute;inset:-16px;border-radius:50%;
+  background:radial-gradient(circle,var(--amber-soft),transparent 70%)}
+.craft .dot{position:relative;width:9px;height:9px;border-radius:50%;background:var(--amber);
+  box-shadow:0 0 14px rgba(240,169,59,.9)}
+.readout{position:absolute;top:64%;right:clamp(20px,5vw,60px);z-index:8;
+  transform:translateY(-24px);text-align:right;color:var(--dim)}
+.readout b{color:var(--amber);font-weight:400}
+.kicker{position:absolute;left:0;right:0;top:clamp(84px,11vh,116px);z-index:9;
+  text-align:center;color:var(--dim);margin:0;pointer-events:none}
+.type{position:absolute;left:50%;top:64%;z-index:9;transform:translate(-50%,-100%);
+  padding:0 0 12px;text-align:center;pointer-events:none;white-space:nowrap}
+h1{margin:0;font-weight:200;line-height:1;color:var(--bone);
+  font-size:clamp(1.16rem,3.3vw,2.31rem);letter-spacing:.6em;text-indent:.6em}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.below{position:absolute;left:0;right:0;top:64%;z-index:9;
+  padding:clamp(28px,4.6vw,50px) clamp(20px,5vw,60px) 0;text-align:center}
+.claim{font-size:clamp(1.05rem,2vw,1.5rem);font-weight:300;margin:0 auto;max-width:30ch}
+.claim em{font-style:normal;color:var(--amber)}
+.claim small{display:block;margin:14px auto 0;font-size:.86rem;color:var(--dim);
+  max-width:52ch;line-height:1.65}
+.svcstrip{margin-top:clamp(20px,2.8vw,32px);color:var(--dim);font-size:.58rem;letter-spacing:.2em}
+.svcstrip i{font-style:normal;color:var(--dimmer);margin:0 .6em}
+.acts{margin-top:clamp(22px,3vw,34px);display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;border:1px solid var(--bone);padding:13px 26px;cursor:pointer;
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;
+  background:transparent;color:var(--bone);transition:background .22s,color .22s,border-color .22s}
+.btn:hover{background:var(--bone);color:var(--night)}
+.btn.solid{background:var(--amber);border-color:var(--amber);color:var(--night)}
+.btn.solid:hover{background:var(--bone);border-color:var(--bone)}
+@media(max-height:760px){.below .svcstrip{display:none}}
+@media(max-height:680px){.below .claim small{display:none}}
+
+/* ---------- the word ---------- */
+.word{position:relative;background:var(--deep);border-top:1px solid var(--hair);overflow:hidden;
+  padding:clamp(52px,8vw,100px) 0}
+.word .decal{right:-9%;top:-16%;width:min(38vw,420px);opacity:.08}
+.word-head{position:relative;z-index:1;display:grid;gap:16px;margin-bottom:clamp(30px,4.4vw,52px)}
+@media(min-width:880px){.word-head{grid-template-columns:1fr minmax(0,40ch);align-items:end}}
+.word h2{font-size:clamp(1.8rem,4vw,3.1rem);max-width:16ch}
+.word-head p{margin:0;color:var(--dim);max-width:44ch}
+.terms{position:relative;z-index:1;margin:0;padding:0;display:grid;gap:1px;
+  background:var(--hair);border:1px solid var(--hair)}
+@media(min-width:820px){
+  .terms{grid-template-columns:1fr 1fr}
+  .terms li:last-child{grid-column:1/-1}
+}
+.terms li{list-style:none;background:var(--deep);padding:26px clamp(18px,2.4vw,30px) 30px}
+.terms .n{font-family:var(--mono);font-size:.62rem;letter-spacing:.22em;color:var(--amber);
+  display:block;margin-bottom:14px}
+.terms b{display:block;font-weight:300;font-size:1.16rem;line-height:1.28}
+.terms p{margin:10px 0 0;font-size:.93rem;color:var(--dim)}
+.signoff{position:relative;z-index:1;display:grid;gap:20px;margin-top:clamp(34px,4.4vw,54px);
+  border-top:1px solid var(--hair);padding-top:clamp(26px,3.2vw,40px)}
+@media(min-width:780px){.signoff{grid-template-columns:auto 1fr;align-items:center;gap:40px}}
+#sig{width:min(80vw,340px);height:auto}
+#sig path{fill:none;stroke:var(--bone);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+#sig .flight{stroke:var(--amber);stroke-width:1.6}
+#sig .craft{fill:var(--amber);stroke:none}
+.signoff p{margin:0;color:var(--dim);max-width:46ch;font-size:.96rem}
+
+/* ---------- page heads ---------- */
+.phead{position:relative;overflow:hidden;padding:clamp(44px,7vw,88px) 0 clamp(30px,4vw,52px)}
+.phead:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--dimmer) 8%,var(--bone) 50%,var(--dimmer) 92%,transparent)}
+.phead .decal{right:-5%;bottom:-30%;width:min(40vw,420px);opacity:.13}
+.phead h2{margin:16px 0 20px;font-size:clamp(2.1rem,5.4vw,4rem);line-height:1.02;
+  max-width:15ch;position:relative;z-index:1}
+.phead p{margin:0;color:var(--dim);max-width:52ch;position:relative;z-index:1}
+
+/* ---------- work ---------- */
+.feature{display:grid;gap:1px;background:var(--hair);border:1px solid var(--hair);
+  margin-bottom:clamp(34px,4vw,56px)}
+@media(min-width:880px){
+  .feature{grid-template-columns:minmax(0,.58fr) minmax(0,1fr)}
+  .feature.alt{grid-template-columns:minmax(0,1fr) minmax(0,.58fr)}
+  .feature.alt .fvid{order:2}
+}
+.feature>div{background:var(--deep)}
+.fvid{display:grid;place-items:center;gap:12px;padding:clamp(18px,2.4vw,30px)}
+.fvid video{width:100%;max-width:320px;aspect-ratio:9/16;object-fit:cover;display:block;
+  background:#000;border:1px solid var(--hair)}
+.vcap{color:var(--dimmer);font-size:.56rem;text-align:center}
+.fbody{padding:clamp(24px,3vw,42px);display:grid;gap:16px;align-content:center}
+.fbody h3{margin:0;font-weight:200;font-size:clamp(1.4rem,2.7vw,2.05rem);line-height:1.1;max-width:19ch}
+.fbody>p:not(.mono){margin:0;color:var(--dim);max-width:48ch}
+.fstats{display:grid;gap:1px;background:var(--hair);border:1px solid var(--hair);margin:6px 0 0}
+@media(min-width:520px){.fstats{grid-template-columns:repeat(3,1fr)}}
+.fstats div{background:var(--deep);padding:16px 18px}
+.fstats dt{font-family:var(--mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.fstats dd{margin:8px 0 0;font-size:1.2rem;font-weight:300}
+.fstats dd em{font-style:normal;color:var(--amber);font-size:.8rem;margin-left:2px}
+.signrule{display:flex;align-items:center;gap:clamp(16px,3vw,30px);
+  margin:clamp(30px,4.4vw,52px) 0}
+.signrule span{flex:1;height:1px;background:var(--hair)}
+.signrule svg{width:clamp(88px,11vw,128px);flex:0 0 auto;opacity:.8}
+.ph-note{display:flex;gap:14px;align-items:flex-start;border:1px dashed var(--dimmer);
+  padding:16px 18px;background:var(--deep);margin-bottom:32px}
+.ph-note p{margin:0;font-size:.9rem;color:var(--dim)}
+.ph-note .tg{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--amber);white-space:nowrap;padding-top:3px}
+.horizons{display:grid;gap:1px;background:var(--hair);border:1px solid var(--hair);margin-top:22px}
+@media(min-width:820px){.horizons{grid-template-columns:repeat(3,1fr)}}
+.horizons div{background:var(--deep);padding:26px 20px 30px;display:grid;gap:10px;align-content:start}
+.horizons .when{font-family:var(--mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--amber)}
+.horizons h3{margin:0;font-weight:300;font-size:1.1rem}
+.horizons p{margin:0;font-size:.92rem;color:var(--dim)}
+
+/* ---------- contact ---------- */
+.cgrid{display:grid;gap:clamp(34px,5vw,64px);padding:clamp(40px,6vw,72px) 0}
+@media(min-width:960px){.cgrid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}}
+form{display:grid;gap:18px}
+.field{display:grid;gap:7px}
+.field label{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.field input,.field select,.field textarea{font:inherit;font-size:1rem;color:var(--bone);
+  background:var(--deep);border:1px solid var(--hair);padding:13px 14px;width:100%;
+  transition:border-color .18s,box-shadow .18s}
+.field option{background:var(--deep);color:var(--bone)}
+.field textarea{min-height:130px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:var(--amber);box-shadow:0 0 0 3px rgba(240,169,59,.14)}
+.field.bad input,.field.bad select{border-color:var(--amber)}
+.err{font-family:var(--mono);font-size:.62rem;color:var(--amber);display:none}
+.field.bad .err{display:block}
+.row2{display:grid;gap:18px}
+@media(min-width:620px){.row2{grid-template-columns:1fr 1fr}}
+.hint{font-family:var(--mono);font-size:.62rem;color:var(--dim);letter-spacing:.05em}
+.sent{display:none;border:1px solid var(--amber);background:var(--deep);padding:30px 26px}
+.sent.on{display:block}
+.sent h3{margin:0 0 10px;font-weight:300;font-size:1.3rem}
+.sent p{margin:0;color:var(--dim);font-size:.95rem}
+.direct{border:1px solid var(--hair);background:var(--deep)}
+.direct .who{padding:26px clamp(20px,2.6vw,30px);border-bottom:1px solid var(--hair)}
+.direct .who b{display:block;font-weight:300;font-size:1.5rem}
+.direct .who span{display:block;margin-top:6px;color:var(--dim);font-size:.9rem}
+.direct ul{list-style:none;margin:0;padding:0}
+.direct li{border-bottom:1px solid var(--hair)}
+.direct li:last-child{border-bottom:0}
+.direct li a{display:flex;align-items:baseline;gap:14px;padding:16px clamp(20px,2.6vw,30px);transition:background .2s}
+.direct li a:hover{background:var(--deeper)}
+.direct .k{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--dim);flex:0 0 74px}
+.direct .v{font-size:1.02rem;word-break:break-word}
+.direct li a:hover .v{color:var(--amber)}
+.block{border-top:1px solid var(--hair);padding:24px 0}
+.block h3{margin:0 0 12px;font-weight:300;font-size:1.06rem}
+.block p,.block li{color:var(--dim);font-size:.94rem}
+.block ul{margin:0;padding-left:18px;display:grid;gap:7px}
+
+/* ---------- cta + footer ---------- */
+.cta{border-top:1px solid var(--hair);padding:clamp(46px,7vw,86px) 0}
+.cta-in{display:grid;gap:26px}
+@media(min-width:880px){.cta-in{grid-template-columns:1fr auto;align-items:center}}
+.cta h2{font-size:clamp(1.5rem,3vw,2.3rem);max-width:18ch}
+.cta p{margin:14px 0 0;color:var(--dim);max-width:44ch}
+footer{border-top:1px solid var(--hair);padding:22px 0}
+.foot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--dimmer)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <g id="ofMark" fill="none" stroke="currentColor" stroke-width="2.3">
+    <circle cx="22" cy="22" r="19"/><circle cx="22" cy="22" r="10.6"/>
+    <circle cx="22" cy="22" r="2.1" fill="#F0A93B" stroke="none"/>
+  </g>
+  <g id="ofWord" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round">
+    <path d="M45,100 A50,50 0 1,1 145,100 A50,50 0 1,1 45,100"/>
+    <path d="M67,100 A28,28 0 1,1 123,100 A28,28 0 1,1 67,100"/>
+    <path d="M187,44 L187,150 M203,44 L203,150 M267,44 L267,150 M283,44 L283,150"/>
+    <path d="M155,88 L315,88"/>
+    <path d="M333,118 A32,32 0 1,1 397,118 A32,32 0 1,1 333,118"/>
+    <circle cx="95" cy="100" r="5.5" fill="#F0A93B" stroke="none"/>
+    <circle cx="365" cy="118" r="5.5" fill="#F0A93B" stroke="none"/>
+  </g>
+  <path id="ofBract" d="M0,0 C-11,-26 -8,-56 0,-82 C8,-56 11,-26 0,0 Z"/>
+  <path id="ofBractIn" d="M0,0 C-8,-17 -5,-37 0,-53 C5,-37 8,-17 0,0 Z"/>
+  <g id="ofProtea" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round">
+    <path d="M0,6 C4,54 8,108 5,180"/>
+    <path d="M5,74 C31,63 49,73 58,92 C37,101 14,92 4,80 Z"/>
+    <path d="M3,120 C-23,109 -41,119 -50,138 C-29,147 -6,138 3,126 Z"/>
+    <use href="#ofBract" transform="rotate(-76)"/><use href="#ofBract" transform="rotate(-57)"/>
+    <use href="#ofBract" transform="rotate(-38)"/><use href="#ofBract" transform="rotate(-19)"/>
+    <use href="#ofBract"/><use href="#ofBract" transform="rotate(19)"/>
+    <use href="#ofBract" transform="rotate(38)"/><use href="#ofBract" transform="rotate(57)"/>
+    <use href="#ofBract" transform="rotate(76)"/>
+    <use href="#ofBractIn" transform="rotate(-48)"/><use href="#ofBractIn" transform="rotate(-24)"/>
+    <use href="#ofBractIn"/><use href="#ofBractIn" transform="rotate(24)"/>
+    <use href="#ofBractIn" transform="rotate(48)"/>
+    <ellipse cx="0" cy="-31" rx="25" ry="21"/>
+  </g>
+</defs></svg>
+
+<div class="bar" id="bar">
+  <a class="lock" href="#/" data-link>
+    <svg viewBox="0 0 44 44" color="#EDE9E1"><use href="#ofMark"/></svg>
+    <span class="name">OTTO <i>FLY</i></span>
+  </a>
+  <nav class="mono">
+    <a href="#/" data-link>Home</a>
+    <a href="#/work" data-link>Work</a>
+    <a href="#/contact" data-link>Contact</a>
+  </nav>
+  <a class="mono tel" style="color:var(--dim)" href="tel:+27822218387">+27 82 221 8387</a>
+</div>
+
+<main>
+<!-- ============ HOME ============ -->
+<section class="route" data-route="/">
+  <div class="hero">
+    <svg class="sky" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="skyg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#04090F"/><stop offset="42%" stop-color="#0A1622"/>
+          <stop offset="72%" stop-color="#1B3348"/><stop offset="88%" stop-color="#3D5A6B"/>
+          <stop offset="100%" stop-color="#6E7A6E"/>
+        </linearGradient>
+        <radialGradient id="glow" cx="50%" cy="86%" r="55%">
+          <stop offset="0%" stop-color="#F0A93B" stop-opacity=".38"/>
+          <stop offset="60%" stop-color="#F0A93B" stop-opacity=".05"/>
+          <stop offset="100%" stop-color="#F0A93B" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1440" height="900" fill="url(#skyg)"/>
+      <rect width="1440" height="900" fill="url(#glow)"/>
+      <g fill="#EDE9E1" opacity=".55">
+        <circle cx="140" cy="90" r="1"/><circle cx="330" cy="150" r="1.3"/><circle cx="520" cy="70" r=".9"/>
+        <circle cx="700" cy="130" r="1.1"/><circle cx="880" cy="60" r="1"/><circle cx="1080" cy="140" r="1.2"/>
+        <circle cx="1260" cy="80" r=".9"/><circle cx="1380" cy="180" r="1"/><circle cx="220" cy="230" r=".8"/>
+        <circle cx="960" cy="210" r=".8"/><circle cx="610" cy="250" r=".7"/><circle cx="1180" cy="270" r=".7"/>
+      </g>
+      <path d="M-40,706 L86,678 L168,652 L246,666 L318,618 L378,630 L432,564 L470,526 L498,572
+               L526,542 L558,596 L602,574 L650,620 L692,600 L728,646 L764,622 L814,590 L862,612
+               L908,588 L962,626 L1012,604 L1066,640 L1122,620 L1182,658 L1252,638 L1322,674
+               L1392,656 L1480,680 L1480,900 L-40,900 Z" fill="#0F1F2C" opacity=".95"/>
+      <path d="M-40,770 C120,744 230,778 340,758 C450,738 528,784 628,766 C728,748 806,790 906,774
+               C1006,758 1094,792 1204,774 C1304,758 1384,786 1480,770 L1480,900 L-40,900 Z" fill="#071119"/>
+      <path d="M-40,846 C140,830 260,856 400,844 C540,832 640,862 780,850 C920,838 1030,864 1170,852
+               C1290,842 1390,860 1480,850 L1480,900 L-40,900 Z" fill="#03080D"/>
+    </svg>
+
+    <svg class="decal right" viewBox="-150 -150 300 360" aria-hidden="true"><use href="#ofProtea"/></svg>
+    <svg class="decal left" viewBox="-150 -150 300 360" aria-hidden="true"><use href="#ofProtea"/></svg>
+
+    <svg class="link">
+      <g id="markG">
+        <path id="solid" d="M0,300 C60,296 120,272 160,236 C180,218 196,186 210,152.5
+          A77.5,77.5 0 1,1 365,152.5 A77.5,77.5 0 1,1 210,152.5
+          M244.1,152.5 A43.4,43.4 0 1,1 330.9,152.5 A43.4,43.4 0 1,1 244.1,152.5
+          M279.75,152.5 A7.75,7.75 0 1,1 295.25,152.5 A7.75,7.75 0 1,1 279.75,152.5
+          M430.1,65.7 L430.1,230 M454.9,230 L454.9,65.7
+          M554.1,65.7 L554.1,230 M578.9,230 L578.9,65.7
+          M380.5,133.9 L628.5,133.9
+          M698.25,180.4 A7.75,7.75 0 1,1 713.75,180.4 A7.75,7.75 0 1,1 698.25,180.4
+          M755.6,180.4 A49.6,49.6 0 1,1 656.4,180.4 A49.6,49.6 0 1,1 755.6,180.4
+          C800,202 862,242 920,268 C950,282 976,292 1000,300"/>
+      </g>
+      <g id="dots"></g>
+      <line id="ray" x1="0" y1="0" x2="0" y2="0"/>
+    </svg>
+
+    <div class="ticks"></div>
+    <div class="horizon"></div>
+    <div class="station" style="left:9%">
+      <svg viewBox="0 0 26 22" aria-hidden="true">
+        <path d="M13 3 L23 20 H3 Z" fill="none" stroke="#EDE9E1" stroke-width="1.2"/>
+        <circle cx="13" cy="3" r="2" fill="#EDE9E1"/>
+      </svg>
+    </div>
+    <div class="craft" id="craft"><span class="halo"></span><span class="dot"></span></div>
+    <div class="readout mono">
+      <div>RANGE <b id="rng">0.00</b> KM</div>
+      <div style="margin-top:4px">VLOS · MAINTAINED</div>
+    </div>
+
+    <p class="kicker mono">Family run · Aerial work · Southern Africa</p>
+    <div class="type"><h1><span class="vh">Otto </span>FLY</h1></div>
+
+    <div class="below">
+      <p class="claim">
+        You can't rebrand a <em>surname</em>.
+        <small>Otto is a family name, and we only get to use it once. Every tank we mix, every hectare we treat and every report we hand over goes out under it. That is the whole business model.</small>
+      </p>
+      <p class="svcstrip mono">
+        ALIEN ERADICATION<i>/</i>CROP SPRAYING<i>/</i>SEEDING<i>/</i>SURVEYING<i>/</i>GEOMAPPING<i>/</i>TURBINE INSPECTION<i>/</i>DAM SEALING
+      </p>
+      <div class="acts">
+        <a class="btn solid" href="#/#word">Read the word</a>
+        <a class="btn" href="#/contact" data-link>Book a site visit</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="word" id="word">
+    <svg class="decal" viewBox="-150 -150 300 360" aria-hidden="true"><use href="#ofProtea"/></svg>
+    <div class="wrap">
+      <div class="word-head">
+        <h2>The word we <em>work by</em>.</h2>
+        <p>Not values on a wall. Five things a client can hold us to, written the way we'd say them across a bakkie bonnet.</p>
+      </div>
+      <ol class="terms">
+        <li><span class="n">One</span><b>Every pilot flies under the Otto name.</b>
+          <p>No handing your farm over to a subcontractor we haven't vetted and approved to fly under the Otto family name.</p></li>
+        <li><span class="n">Two</span><b>We stop when the wind says stop.</b>
+          <p>Drift onto a neighbour's vines is somebody's whole season. If conditions turn we stand down and come back, even when standing down costs us the day.</p></li>
+        <li><span class="n">Three</span><b>Supply your own materials, or let us source them.</b>
+          <p>Our pilots are POC certified and can fly your own mixtures, or we can source and supply for each job.</p></li>
+        <li><span class="n">Four</span><b>We'll tell you when we're the wrong people.</b>
+          <p>Some jobs belong to a ground crew, a contractor, or nobody at all. We'd rather lose the quote than take money for work a drone shouldn't be doing.</p></li>
+        <li><span class="n">Five</span><b>Every report leaves here signed.</b>
+          <p>A name at the bottom of the page, by hand. If something is wrong with it, you know exactly whose phone to ring.</p></li>
+      </ol>
+      <div class="signoff">
+        <svg id="sig" viewBox="0 0 440 150" aria-label="Otto signature">
+          <path d="M46 112 C18 98 22 44 56 30 C84 19 100 44 90 70 C81 94 56 110 44 116
+                   C60 108 78 88 96 56 C106 38 116 26 121 32 C127 40 112 80 114 100
+                   C116 116 132 112 143 98 C154 82 163 52 170 38 C175 28 182 30 179 44
+                   C174 68 165 88 170 100 C175 114 191 106 200 94
+                   C211 78 227 68 238 76 C249 84 242 104 228 106 C214 108 212 90 224 82"/>
+          <path d="M96 58 L138 44 M150 46 L192 32" stroke-width="2.4"/>
+          <path class="flight" d="M240 78 C270 62 320 52 372 46 C392 44 404 42 414 40"/>
+          <circle class="craft" cx="418" cy="39" r="5"/>
+        </svg>
+        <p>Every flight log, coverage map and inspection report that leaves this business carries a signature. It is the oldest accountability tool there is, and it still works.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta wrap">
+    <div class="cta-in">
+      <div><h2>Tell us what needs doing.</h2>
+        <p>Send the farm name and a rough hectare count. Assessments cost nothing.</p></div>
+      <a class="btn solid" href="#/contact" data-link>Book a site visit</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section class="route" data-route="/work">
+  <div class="phead">
+    <svg class="decal" viewBox="-150 -150 300 360" aria-hidden="true"><use href="#ofProtea"/></svg>
+    <div class="wrap">
+      <p class="mono" style="color:var(--dim);margin:0">Work</p>
+      <h2>What we've flown, and <em>where we're going</em>.</h2>
+      <p>Case studies, coverage figures and client references land here once the content is signed off.</p>
+    </div>
+  </div>
+
+  <div class="wrap" style="padding-top:clamp(40px,6vw,72px);padding-bottom:clamp(20px,3vw,40px)">
+    <article class="feature">
+      <div class="fvid">
+        <video controls playsinline muted loop autoplay preload="metadata"
+               poster="media/langkloof-poster.jpg" src="media/langkloof.mp4"></video>
+        <span class="vcap mono">Langkloof · from the ground station</span>
+      </div>
+      <div class="fbody">
+        <p class="mono" style="color:var(--amber);margin:0">Case 01 · Alien eradication · Langkloof</p>
+        <h3>150 hectares of river system, treated from the air.</h3>
+        <p>Alien eradication through the river systems of the Langkloof. The terrain was too rugged to reach on foot or with traditional machinery, so every hectare was flown instead.</p>
+        <dl class="fstats">
+          <div><dt>Treated</dt><dd>150 <em>ha</em></dd></div>
+          <div><dt>Terrain</dt><dd>Riverine, rugged</dd></div>
+          <div><dt>Ground access</dt><dd>None</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <div class="signrule" aria-hidden="true"><span></span>
+      <svg viewBox="0 0 480 200" color="#EDE9E1"><use href="#ofWord"/></svg><span></span></div>
+
+    <article class="feature alt">
+      <div class="fvid">
+        <video controls playsinline muted loop autoplay preload="metadata"
+               poster="media/avocado-poster.jpg" src="media/avocado.mp4"></video>
+        <span class="vcap mono">Garden Route · orchard application</span>
+      </div>
+      <div class="fbody">
+        <p class="mono" style="color:var(--amber);margin:0">Case 02 · Growth control &amp; herbicide · Garden Route</p>
+        <h3>50 hectares of avocado, sprayed while the ground was too wet to drive.</h3>
+        <p>Growth control and herbicide applied across a large avocado farm. The grower wanted to trial aerial application, and the orchard floor was too wet to carry conventional farm equipment. Time and cost were measured against the ground alternative throughout.</p>
+        <dl class="fstats">
+          <div><dt>Treated</dt><dd>50 <em>ha</em></dd></div>
+          <div><dt>Applied</dt><dd>Growth control, herbicide</dd></div>
+          <div><dt>Why flown</dt><dd>Orchard too wet</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <div class="signrule" aria-hidden="true"><span></span>
+      <svg viewBox="0 0 480 200" color="#EDE9E1"><use href="#ofWord"/></svg><span></span></div>
+
+    <article class="feature">
+      <div class="fvid">
+        <video controls playsinline muted loop autoplay preload="metadata"
+               poster="media/canola-poster.jpg" src="media/canola.mp4"></video>
+        <span class="vcap mono">Vlees Bay · canola under spray</span>
+      </div>
+      <div class="fbody">
+        <p class="mono" style="color:var(--amber);margin:0">Case 03 · Herbicide · Vlees Bay</p>
+        <h3>250 hectares of canola, flown after the rain shut the lands.</h3>
+        <p>Herbicide applied across 250 hectares of canola. Heavy rainfall had left the lands far too wet to carry a sprayer, and the grower wanted the cost of flying set against traditional application before committing.</p>
+        <dl class="fstats">
+          <div><dt>Treated</dt><dd>250 <em>ha</em></dd></div>
+          <div><dt>Applied</dt><dd>Herbicide</dd></div>
+          <div><dt>Why flown</dt><dd>Lands too wet</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <div class="signrule" aria-hidden="true"><span></span>
+      <svg viewBox="0 0 480 200" color="#EDE9E1"><use href="#ofWord"/></svg><span></span></div>
+
+    <article class="feature alt">
+      <div class="fvid">
+        <video controls playsinline muted loop autoplay preload="metadata"
+               poster="media/damit-poster.jpg" src="media/damit.mp4"></video>
+        <span class="vcap mono">Riversdale · sealer going down</span>
+      </div>
+      <div class="fbody">
+        <p class="mono" style="color:var(--amber);margin:0">Case 04 · Dam waterproofing · Riversdale</p>
+        <h3>A whole dam sealed in a single day.</h3>
+        <p>Waterproofing laid down with patented DAMIT dam-sealing technology, flown across the entire dam from first load to last in one day. On a job like this there is no better application method.</p>
+        <dl class="fstats">
+          <div><dt>Completed</dt><dd>1 <em>day</em></dd></div>
+          <div><dt>Applied</dt><dd>DAMIT sealer</dd></div>
+          <div><dt>Coverage</dt><dd>Full dam</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <div class="signrule" aria-hidden="true"><span></span>
+      <svg viewBox="0 0 480 200" color="#EDE9E1"><use href="#ofWord"/></svg><span></span></div>
+
+    <div class="ph-note">
+      <span class="tg">More to come</span>
+      <p>Further case studies drop in below as the season runs — same shape each time: the district, what the ground was doing, why flying beat the alternative, and the measured result.</p>
+    </div>
+
+    <div style="margin-top:clamp(48px,6vw,86px)">
+      <h2 style="font-size:clamp(1.6rem,3.4vw,2.6rem)">Where we want to go</h2>
+      <p style="color:var(--dim);margin:16px 0 0;max-width:46ch">The direction of the business, stated plainly. Edit the three horizons to match the plan.</p>
+    </div>
+    <div class="horizons">
+      <div><span class="when">Now</span><h3>Cover South Africa</h3>
+        <p>Full seasonal coverage for spraying and alien clearing across the country, with a second spray platform in the air.</p></div>
+      <div><span class="when">Next</span><h3>Data, not just flights</h3>
+        <p>Turn every mission into a record: multispectral health maps and repeat surveys clients can compare season on season.</p></div>
+      <div><span class="when">Later</span><h3>Standing infrastructure work</h3>
+        <p>Scheduled turbine and dam inspection rounds under retainer, with certified reporting for engineers and insurers.</p></div>
+    </div>
+  </div>
+
+  <div class="cta wrap">
+    <div class="cta-in">
+      <div><h2>Want to be a case study?</h2>
+        <p>We're taking bookings for the coming season.</p></div>
+      <a class="btn solid" href="#/contact" data-link>Book a site visit</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="route" data-route="/contact">
+  <div class="phead">
+    <svg class="decal" viewBox="-150 -150 300 360" aria-hidden="true"><use href="#ofProtea"/></svg>
+    <div class="wrap">
+      <p class="mono" style="color:var(--dim);margin:0">Contact</p>
+      <h2>Speak to <em>Jean</em>.</h2>
+      <p>There's no switchboard and no call centre. Tell us where the land is and what's wrong with it, and we'll come out, walk it, and send back a plan with a price on it. Assessments cost nothing.</p>
+    </div>
+  </div>
+
+  <div class="wrap cgrid">
+    <div>
+      <h2 style="font-size:clamp(1.4rem,2.6vw,2rem)">Book a site visit</h2>
+      <p class="hint" style="margin:8px 0 26px">Everything except your name and a way to reach you is optional.</p>
+      <form id="f" novalidate>
+        <div class="row2">
+          <div class="field"><label for="name">Your name</label>
+            <input id="name" type="text" autocomplete="name" required>
+            <span class="err">We need a name to ask for.</span></div>
+          <div class="field"><label for="org">Farm or company</label>
+            <input id="org" type="text" autocomplete="organization"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="email">Email</label>
+            <input id="email" type="email" autocomplete="email" required>
+            <span class="err">A working email, so we can send the plan.</span></div>
+          <div class="field"><label for="phone">Phone</label>
+            <input id="phone" type="tel" autocomplete="tel" placeholder="+27"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="svc">What needs flying</label>
+            <select id="svc" required>
+              <option value="">Choose one</option>
+              <option>Alien vegetation eradication</option><option>Crop spraying</option>
+              <option>Crop seeding</option><option>Land surveying</option>
+              <option>Geomapping</option><option>Wind turbine inspection</option>
+              <option>Dam waterproofing</option><option>Not sure yet</option>
+            </select>
+            <span class="err">Pick the closest — we'll sort the detail on site.</span></div>
+          <div class="field"><label for="where">Where is the site</label>
+            <input id="where" type="text" placeholder="Farm name, town or district"></div>
+        </div>
+        <div class="field"><label for="size">Rough size</label>
+          <input id="size" type="text" placeholder="Hectares, turbines, or dam surface area">
+          <span class="hint">An estimate is fine. It tells us which aircraft to bring.</span></div>
+        <div class="field"><label for="msg">What's the job</label>
+          <textarea id="msg" placeholder="Terrain, access, deadlines, what's already been tried."></textarea></div>
+        <div>
+          <button class="btn solid" type="submit">Send request</button>
+          <p class="hint" style="margin-top:14px">Jean replies within one working day.</p>
+        </div>
+      </form>
+      <div class="sent" id="sent" role="status">
+        <h3>Request sent</h3>
+        <p id="sentBody">Thanks — we've got it. Jean will be in touch within one working day.</p>
+        <p class="hint" style="margin-top:16px">Nothing happened? Email <a href="mailto:jean@ottofly.co.za" style="color:var(--amber)">jean@ottofly.co.za</a> or WhatsApp <a href="https://wa.me/27822218387" style="color:var(--amber)">+27 82 221 8387</a>.</p>
+      </div>
+    </div>
+
+    <aside>
+      <div class="direct">
+        <div class="who"><b>Jean Otto</b><span>Otto Fly · Aerial work</span></div>
+        <ul>
+          <li><a href="tel:+27822218387"><span class="k">Phone</span><span class="v">+27 82 221 8387</span></a></li>
+          <li><a href="mailto:jean@ottofly.co.za"><span class="k">Email</span><span class="v">jean@ottofly.co.za</span></a></li>
+          <li><a href="https://www.ottofly.co.za"><span class="k">Web</span><span class="v">www.ottofly.co.za</span></a></li>
+          <li><a href="https://wa.me/27822218387"><span class="k">WhatsApp</span><span class="v">Send a message</span></a></li>
+        </ul>
+      </div>
+      <div class="block" style="margin-top:34px"><h3>Hours</h3>
+        <p>Monday to Friday, 07:00–17:00.<br>In spray season we fly weekends and first light.</p></div>
+      <div class="block"><h3>Have this ready</h3>
+        <ul><li>Farm or erf number, or just drop a pin</li><li>Rough hectares</li>
+          <li>Anything tall or live nearby — powerlines, masts, a neighbour's crop</li>
+          <li>The chemical or seed you want used, if it's already chosen</li></ul></div>
+      <div class="block"><h3>Where we work</h3>
+        <p>Across South Africa, wherever the work is — we fly. Contact us for all your aerial needs.</p></div>
+      <div class="block"><h3>Compliance</h3>
+        <p>All flights run under South African civil aviation rules for remotely piloted aircraft, with licensed pilots and current insurance.</p></div>
+    </aside>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot mono">
+    <span>© 2026 Otto Fly</span>
+    <span>www.ottofly.co.za</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------------- hero ---------------- */
+var hero=document.querySelector(".hero"),
+    craft=document.getElementById("craft"),
+    markG=document.getElementById("markG"),
+    solid=document.getElementById("solid"),
+    dotsG=document.getElementById("dots"),
+    ray=document.getElementById("ray"),
+    rng=document.getElementById("rng");
+var NS="http://www.w3.org/2000/svg";
+var typeEl=document.querySelector(".type");
+var TT_CENTRE=504.5;   /* midpoint between the two t stems, in mark coordinates */
+var ox=0,oy=0,sc=1,L=0,p=0,dots=[],idx=0,phase="fly",t0=null;
+
+function layout(){
+  var w=hero.clientWidth, h=hero.clientHeight;
+  if(!w||!h) return false;
+  var hy=h*0.64;
+  ox=w*0.09; oy=hy-18; sc=w*0.74/1000;
+  markG.setAttribute("transform","translate("+ox+","+(oy-300*sc)+") scale("+sc+")");
+  solid.style.strokeWidth=(3.4/sc);
+  L=solid.getTotalLength();
+  typeEl.style.left=(ox+TT_CENTRE*sc)+"px";
+  if(!dots.length) buildDots(); else placeDots();
+  return true;
+}
+function toPx(x,y){ return {x:ox+x*sc, y:oy-300*sc+y*sc}; }
+
+/* dots are spaced evenly WITHIN each subpath, so the four t stems and both
+   rings get identical, symmetrical spacing instead of drifting out of phase */
+function buildDots(){
+  var STEP=13;
+  dotsG.innerHTML=""; dots=[];
+  var subs=solid.getAttribute("d").trim().split(/(?=M)/).filter(function(s){return s.trim()});
+  var tmp=document.createElementNS(NS,"path");
+  tmp.setAttribute("fill","none"); tmp.setAttribute("stroke","none");
+  markG.appendChild(tmp);
+  var cum=0;
+  subs.forEach(function(sd){
+    tmp.setAttribute("d",sd);
+    var len=tmp.getTotalLength();
+    if(len<=0) return;
+    var a=tmp.getPointAtLength(0), b=tmp.getPointAtLength(len);
+    var closed=Math.abs(a.x-b.x)<0.5 && Math.abs(a.y-b.y)<0.5;
+    var n=Math.max(1,Math.round(len/STEP));
+    var last=closed ? n-1 : n;
+    for(var i=0;i<=last;i++){
+      var local=len*i/n;
+      var q=tmp.getPointAtLength(local);
+      dots.push({d:cum+local, x:q.x, y:q.y});
+    }
+    cum+=len;
+  });
+  markG.removeChild(tmp);
+  dots.forEach(function(o){
+    var c=document.createElementNS(NS,"circle");
+    c.setAttribute("r","2.4"); dotsG.appendChild(c); o.el=c;
+  });
+  placeDots();
+}
+function placeDots(){
+  dots.forEach(function(o){
+    var q=toPx(o.x,o.y);
+    o.el.setAttribute("cx",q.x); o.el.setAttribute("cy",q.y);
+  });
+}
+function setP(v){
+  p=v;
+  var dist=L*v;
+  while(idx<dots.length && dots[idx].d<=dist){ dots[idx].el.style.opacity=".95"; idx++; }
+  var pt=solid.getPointAtLength(dist), q=toPx(pt.x,pt.y);
+  craft.style.transform="translate("+q.x+"px,"+q.y+"px) translate(-50%,-50%)";
+  ray.setAttribute("x1",ox); ray.setAttribute("y1",oy);
+  ray.setAttribute("x2",q.x); ray.setAttribute("y2",q.y);
+  rng.textContent=(Math.sqrt(Math.pow(q.x-ox,2)+Math.pow(q.y-oy,2))/hero.clientWidth*2.6).toFixed(2);
+}
+function reset(){
+  idx=0; phase="fly"; t0=null;
+  dots.forEach(function(o){ o.el.style.opacity=0; });
+  solid.style.opacity=0; dotsG.style.opacity=1; markG.style.opacity=1;
+  craft.style.opacity=1; ray.style.opacity=".7";
+  if(L) setP(0);
+}
+var DUR=9000, LOCK=700, HOLD=3200, FADE=1000;
+function frame(now){
+  requestAnimationFrame(frame);
+  if(!hero.clientWidth) return;
+  if(!L && !layout()) return;
+  if(t0===null) t0=now;
+  var e=now-t0;
+  if(phase==="fly"){
+    var v=Math.min(1,e/DUR);
+    setP(v<0.05 ? v*v/0.05 : v);
+    if(v>=1){ phase="lock"; t0=now;
+      solid.style.opacity=1; dotsG.style.opacity=0;
+      craft.style.opacity=0; ray.style.opacity=0; }
+  }else if(phase==="lock"){ if(e>LOCK){ phase="hold"; t0=now; } }
+  else if(phase==="hold"){ if(e>HOLD){ phase="fade"; t0=now; markG.style.opacity=0; } }
+  else { if(e>FADE){ reset(); t0=now; } }
+}
+
+/* ---------------- signature ---------------- */
+var sig=document.getElementById("sig");
+var strokes=sig.querySelectorAll("path"), mark=sig.querySelector(".craft");
+strokes.forEach(function(pa){
+  var l=pa.getTotalLength();
+  pa.dataset.len=l; pa.style.strokeDasharray=l; pa.style.strokeDashoffset=l;
+});
+mark.style.opacity=0;
+function drawSig(){
+  var d=0;
+  strokes.forEach(function(pa){
+    var l=+pa.dataset.len, dur=l/240;
+    pa.style.transition="stroke-dashoffset "+dur+"s ease-in-out "+d+"s";
+    pa.style.strokeDashoffset=0;
+    if(pa.classList.contains("flight"))
+      setTimeout(function(){pa.style.strokeDasharray="3 6";},(d+dur)*1000);
+    d+=dur*0.72;
+  });
+  mark.style.transition="opacity .4s ease "+(d+0.3)+"s";
+  mark.style.opacity=1;
+}
+
+/* ---------------- router ---------------- */
+var routes=document.querySelectorAll(".route"), bar=document.getElementById("bar");
+function go(){
+  var raw=location.hash.replace(/^#/,"")||"/";
+  var anchor=null;
+  var hashIdx=raw.indexOf("#");
+  if(hashIdx>-1){ anchor=raw.slice(hashIdx+1); raw=raw.slice(0,hashIdx)||"/"; }
+  var path=raw;
+  var found=false;
+  routes.forEach(function(r){
+    var on=r.getAttribute("data-route")===path;
+    r.classList.toggle("on",on); if(on) found=true;
+  });
+  if(!found){ routes[0].classList.add("on"); path="/"; }
+  bar.classList.toggle("solid", path!=="/");
+  document.querySelectorAll(".bar nav a").forEach(function(a){
+    var t=a.getAttribute("href").replace(/^#/,"")||"/";
+    if(t===path) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
+  });
+  if(path==="/"){ L=0; layout(); reset(); }
+  if(anchor){
+    var el=document.getElementById(anchor);
+    if(el){ setTimeout(function(){ el.scrollIntoView({behavior:reduce?"auto":"smooth"}); },40); return; }
+  }
+  window.scrollTo(0,0);
+}
+addEventListener("hashchange",go);
+addEventListener("resize",function(){ if(hero.clientWidth){ layout(); if(phase==="fly") setP(p); } });
+
+/* ---------------- contact form ---------------- */
+var f=document.getElementById("f"), sent=document.getElementById("sent");
+f.addEventListener("submit",function(e){
+  e.preventDefault();
+  var ok=true;
+  ["name","email","svc"].forEach(function(id){
+    var el=document.getElementById(id), fl=el.closest(".field"), good=el.value.trim()!=="";
+    if(id==="email") good=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());
+    fl.classList.toggle("bad",!good);
+    if(!good && ok){ el.focus(); ok=false; }
+  });
+  if(!ok) return;
+  var g=function(id){return document.getElementById(id).value.trim();};
+  var who=g("name").split(" ")[0];
+  var body=[
+    "Name: "+g("name"),
+    "Farm or company: "+(g("org")||"-"),
+    "Email: "+g("email"),
+    "Phone: "+(g("phone")||"-"),
+    "Service: "+g("svc"),
+    "Location: "+(g("where")||"-"),
+    "Rough size: "+(g("size")||"-"),
+    "",
+    "The job:",
+    g("msg")||"-"
+  ].join("\n");
+  var href="mailto:jean@ottofly.co.za"
+    +"?subject="+encodeURIComponent("Site visit request — "+g("svc")+" — "+(g("org")||g("name")))
+    +"&body="+encodeURIComponent(body);
+  document.getElementById("sentBody").textContent=
+    "Thanks "+who+" — your mail app should have opened with everything filled in. Press send and it lands with Jean.";
+  f.style.display="none"; sent.classList.add("on");
+  sent.scrollIntoView({behavior:reduce?"auto":"smooth",block:"center"});
+  window.location.href=href;
+});
+f.addEventListener("input",function(e){
+  var fl=e.target.closest(".field"); if(fl) fl.classList.remove("bad");
+});
+
+/* ---------------- boot ---------------- */
+if(!location.hash) location.hash="#/";
+go();
+if(reduce){
+  layout();
+  dotsG.style.opacity=0; solid.style.opacity=1;
+  craft.style.opacity=0; ray.style.opacity=0;
+  strokes.forEach(function(pa){ pa.style.strokeDashoffset=0;
+    if(pa.classList.contains("flight")) pa.style.strokeDasharray="3 6"; });
+  mark.style.opacity=1;
+}else{
+  requestAnimationFrame(frame);
+  new IntersectionObserver(function(es,io){
+    es.forEach(function(e){ if(e.isIntersecting){ drawSig(); io.disconnect(); } });
+  },{threshold:.35}).observe(sig);
+}
+})();
+</script>
